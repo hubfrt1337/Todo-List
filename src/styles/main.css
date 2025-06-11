@@ -1,0 +1,9 @@
+main{
+    display: flex;
+}
+header{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 3rem;
+    margin-left: 2rem;
+}

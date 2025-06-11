@@ -1,2 +1,2 @@
-Template repository.
-Contains webpack configurations
+Welcome on Todo-list project
+
