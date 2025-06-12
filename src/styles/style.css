@@ -16,7 +16,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     font-size: 1.3rem;
     gap: 4rem;
 }
