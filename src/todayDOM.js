@@ -1,17 +1,25 @@
 import imgTask from './images/picture.png';
 import arrow from './images/arrow-down.png';
+import checkImg from './images/check.png';
+
 
 const section = document.querySelector('.sectionJs');
 const header = document.querySelector('.headerJs');
 const addedTaskContainer = document.querySelector('.added-tasks-container')
 
-function clear(){
+export function clear(){
     section.innerHTML = ``;
     section.appendChild(header);
     section.appendChild(addedTaskContainer);
 }
+export function clearForm(){
+    section.innerHTML = ``;
+    section.appendChild(header);
+    section.appendChild(addedTaskContainer);
+    showPlaceContent()
+}
 
-function showPlaceContent() { 
+export function showPlaceContent() { 
     const placeContent = document.createElement('div');
 const pictureC = document.createElement('div');
 const picture = document.createElement('img');
@@ -36,10 +44,9 @@ placeContent.appendChild(taskText);
 placeContent.appendChild(btn);
 section.appendChild(placeContent);
 }
-
 showPlaceContent()
 
-function showAddForm(){
+export function showAddForm(){
     const form = document.createElement('form');
 const taskTitle = document.createElement('div');
 const inputTitle = document.createElement('input');
@@ -57,7 +64,8 @@ taskDesc.className = 'task-description'
 inputTitle.type = 'text';
 inputTitle.id = 'title-input';
 inputTitle.name = 'title';
-inputTitle.placeholder = 'Title: Go shopping'
+inputTitle.placeholder = 'Title: Go shopping';
+inputTitle.required = true;
 form.className = 'task-container';
 taskTitle.className = 'task-title';
 taskDesc.innerHTML =   `<input type="text" name="desc" id="desc-input" placeholder="Description: Buy groceries for lasagne"></input>`;
@@ -85,8 +93,11 @@ btnCancelAddC.className = 'btn-cancel-add-flex'
 const btnAdd = document.createElement('button');
 const btnCancel = document.createElement('button');
 btnCancel.className = 'cancel-btn';
+btnCancel.type = 'button';
 btnCancel.textContent = 'Cancel';
 btnAdd.className = 'add-task-form';
+btnAdd.type = 'button';
+//btnAdd.disabled = true;
 btnAdd.textContent = 'Add Task';
 btnCancelAddC.appendChild(btnCancel);
 btnCancelAddC.appendChild(btnAdd);
@@ -104,34 +115,49 @@ section.appendChild(form);
 }
 
 
-function showSingleTask(){
+export function showSingleTask(todo){
     const singleTask = document.createElement('article');
 singleTask.className = 'single-task';
 
-const topFlex = document.createElement('div')
+const topFlex = document.createElement('div');
 topFlex.className = 'flex-task-top';
 const tytul = document.createElement('div');
 tytul.className = 'tytul'
 const prior = document.createElement('div');
-tytul.textContent = 'Zakupy';
-prior.textContent = 'Priority1';
-
+tytul.textContent = todo.title;
+prior.textContent = todo.priority;
 const flexTask = document.createElement('div');
 flexTask.className = 'flex-task';
 const opis = document.createElement('div');
 const checkpoint = document.createElement('div');
 opis.className = 'opis';
-opis.textContent = 'blbdfbdmfldfdfmfdmvmdffd';
+opis.textContent = todo.description;
 checkpoint.className = 'task-checkpoint';
-
+const check = document.createElement('img');
+check.src = checkImg;
+check.className = 'check-green';
+checkpoint.appendChild(check);
+checkpoint.dataset.id = todo.id;
+const dateContainer = document.createElement('div');
+dateContainer.textContent = todo.date;
 topFlex.appendChild(tytul);
-topFlex.appendChild(prior)
+topFlex.appendChild(dateContainer);
+topFlex.appendChild(prior);
 singleTask.appendChild(topFlex);
 
 flexTask.appendChild(opis);
 flexTask.appendChild(checkpoint);
 singleTask.appendChild(flexTask);
 addedTaskContainer.appendChild(singleTask);
+const proj = todo.project;
 }
 
-console.log(document.querySelector('.add-task'));
+export function showAddBtn(){
+    const btn = document.createElement('button');
+    btn.classList = 'add-btn-header';
+    btn.innerHTML = `<span>+</span> Add Task`;
+    header.appendChild(btn);
+    console.log('sa')
+}
+
+

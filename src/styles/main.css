@@ -1,5 +1,6 @@
 
 main{
+    min-height: 100vh;
     display: grid;
     grid-template-columns: 300px 1fr;
 }
@@ -134,11 +135,13 @@ header{
     margin-left: 5px;
 }
 .single-task{
+    max-width: 600px;
     margin-left: 2rem;
     margin-right: 2rem;
     padding: 10px;
     border: solid 1px grey;
     border-radius: 0.5rem;
+    margin-bottom: 1rem;
 }
 .tytul{
     font-weight: bold;
@@ -149,11 +152,26 @@ header{
     justify-content: space-between;
 }
 .task-checkpoint{
+    height: 20px;
+    width: 20px;
     border: solid 1px black;
-    padding: 8px;
     cursor: pointer;
-    transition: all linear 0.5s;
+    transition: all linear 0.1s;
 }
+.check-green{
+    display: block;
+    opacity: 0;
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    margin: auto;
+    margin-top: 2px;
+    transition: all linear 0.2s;
+}
+.check-green:hover{
+    opacity: 1;
+}
+
 .task-checkpoint:hover{
     background-color: lightgray;
 }
@@ -161,4 +179,33 @@ header{
     display: flex;
     gap: 3rem;
     font-weight: bold;
+    align-items: center;
+   
+}
+
+
+/* js */
+
+.btn-not-allowed,
+.btn-not-allowed:hover{
+    cursor: not-allowed;
+    background-color: #f7a7a0;;
+}
+
+.add-btn-header{
+    cursor: pointer;
+    width: 110px;
+    display: flex;
+    color: white;
+    background-color: #dc4c3e;
+    border: none;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 8px;
+    margin-top: 1rem;
+}
+.add-btn-header:hover{
+    background-color: #db2110;
 }
