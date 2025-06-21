@@ -1,6 +1,8 @@
 import imgTask from './images/picture.png';
 import arrow from './images/arrow-down.png';
 import checkImg from './images/check.png';
+import { addedTask } from './addTodo';
+const addTodoString = 'Add Todo<button class="add-btn-header"><span>+</span> Add Task</button>';
 
 
 const section = document.querySelector('.sectionJs');
@@ -10,6 +12,12 @@ const addedTaskContainer = document.querySelector('.added-tasks-container')
 export function clear(){
     section.innerHTML = ``;
     section.appendChild(header);
+    section.appendChild(addedTaskContainer);
+}
+export function clearAll(){
+    section.innerHTML = ``;
+    section.appendChild(header);
+    addedTaskContainer.innerHTML = ``;
     section.appendChild(addedTaskContainer);
 }
 export function clearForm(){
@@ -138,6 +146,12 @@ check.src = checkImg;
 check.className = 'check-green';
 checkpoint.appendChild(check);
 checkpoint.dataset.id = todo.id;
+if(header.innerHTML === 'Add Todo' || header.innerHTML === addTodoString){
+    checkpoint.style.display = 'none';
+}
+if(header.innerHTML === 'Completed Tasks!'){
+    checkpoint.style.display = 'none';
+}
 const dateContainer = document.createElement('div');
 dateContainer.textContent = todo.date;
 topFlex.appendChild(tytul);

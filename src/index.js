@@ -3,21 +3,30 @@ import './styles/main.css';
 import './imagesScript.js';
 import './todayDOM.js'
 import './todayScript.js'
-import { clear, clearForm, showAddBtn, showAddForm, showPlaceContent } from './todayDOM.js';
-import { showTodosArray , addCheckpointListener, todosArray, addTask} from './todayScript.js';
+import { clear, clearForm, clearAll, showAddBtn, showAddForm, showPlaceContent } from './todayDOM.js';
+import { showTodosArray , addCheckpointListener, todosArray, addTask, showTodayTodosArray, todayTodosArray, showBoth} from './todayScript.js';
 import { showCompletedTasks } from './completed.js';
+const { isBefore, isToday } = require("date-fns");
 
+
+
+const header = document.querySelector('.headerJs');
 
 document.querySelectorAll('.row-container').forEach(option => {
     option.addEventListener('click', () => {
         if(option.classList.contains('addJs')){
-            clear();
-            showAddForm()
+            header.innerHTML = 'Add Todo';
+            clearAll();
+            showAddForm();
+            addTask();
+            
+            
         }else if(option.classList.contains('todayJs')){
             clear()
-            showTodosArray();
+            showTodayTodosArray();
             addCheckpointListener();
-            if(todosArray.length == 0){
+            header.innerHTML = 'Today';
+            if(todayTodosArray.length == 0){
                 showPlaceContent();
                 document.querySelector('.add-task').addEventListener('click', addTask);
             } else {
@@ -30,10 +39,13 @@ document.querySelectorAll('.row-container').forEach(option => {
                
             }
         } else if(option.classList.contains('upcomingJs')){
-            
-        } else if(option.classList.contains('completedJs')){
             clear();
-            document.querySelector('.headerJs').innerHTML = `Completed Tasks!`;
+            header.textContent = 'Upcoming Tasks';
+            showBoth();
+            addCheckpointListener();
+        } else if(option.classList.contains('completedJs')){
+            clearAll();
+            header.innerHTML = `Completed Tasks!`;
             showCompletedTasks();
         }
     })

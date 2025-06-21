@@ -1,13 +1,16 @@
 import { clear, clearForm, showAddBtn, showAddForm, showPlaceContent, showSingleTask} from './todayDOM';
 import { showCompletedTasks } from './completed.js';
+const { isBefore, isToday } = require("date-fns");
 export const todosArray = [];
+export const todayTodosArray = [];
 export const todosCompletedArray = [];
 
 function factoryTodos(title, description, date, priority, project){
     const id = crypto.randomUUID();
     return {title, description, date, priority, project, id}
 }
-
+ const addTodoString = 'Add Todo<button class="add-btn-header"><span>+</span> Add Task</button>';
+ const todayTodoString = 'Today<button class="add-btn-header"><span>+</span> Add Task</button>';
 
 document.querySelector('.add-task').addEventListener('click', function(){
     addTask();
@@ -32,29 +35,52 @@ document.querySelector('.add-task').addEventListener('click', function(){
             }
     });  
     addBtn.addEventListener('click', () => {
+        const header = document.querySelector('.headerJs').innerHTML;
         if(inputTitle.value){
             addBtn.classList.add('btn-not-allowed');
             const todo = factoryTodos(inputTitle.value, inputDesc.value, date.value, prior.value, project.textContent);
-            todosArray.push(todo)
-            showTodosArray();
+            if(header == 'Add Todo' || header == addTodoString){
+                todosArray.push(todo);
+                showSingleTask(todo);
+            } else if(isToday(date.value) || isBefore(date.value)){
+                todayTodosArray.push(todo);
+                showTodayTodosArray();
+                addCheckpointListener();
+                addToLocalStorage();
+            }else {
+                todosArray.push(todo)
+               // showTodosArray();
+                //console.log(header);
+                //addCheckpointListener();
+            }
+            
+            console.log(isToday(new Date(date.value)))
             clearInput(inputTitle, inputDesc, date, prior, project);
-            addCheckpointListener();
             if(document.querySelector('.add-btn-header')){
                     return;
                 } else {
                     showAddBtn();
-                     document.querySelector('.add-btn-header').addEventListener('click', addTask);
+                    document.querySelector('.add-btn-header').addEventListener('click', addTask);
                 }
         }
     })
     // canceling form
     document.querySelector('.cancel-btn').addEventListener('click', () => {
-        if(todosArray.length === 0){
-            clearForm();
+        const header = document.querySelector('.headerJs').textContent;
+        if(todosArray.length === 0 || todayTodosArray.length === 0){
+            if(header == 'Add Todo'){
+                clear()
+                showAddBtn()
+                document.querySelector('.add-btn-header').addEventListener('click', addTask);
+            } else {
+                clearForm();
             document.querySelector('.add-task').addEventListener('click', function(){
             addTask();
-        })
+        })}
         } else {
+            if(header == 'Add Todo'){
+                showAddBtn();
+            }
             clear();
             document.querySelector('.add-btn-header').addEventListener('click', addTask);
         }
@@ -68,16 +94,40 @@ export function showTodosArray(){
         showSingleTask(todos);
     }) 
 }
+export function showTodayTodosArray(){
+    document.querySelector('.added-tasks-container').innerHTML = ``;
+    todayTodosArray.forEach((todos)  => {
+        showSingleTask(todos);
+    }) 
+}
+export function showBoth(){
+    document.querySelector('.added-tasks-container').innerHTML = ``;
+    todayTodosArray.forEach((todos)  => {
+        showSingleTask(todos);
+    }) 
+    todosArray.forEach((todos)  => {
+        showSingleTask(todos);
+    }) 
 
+}
 
 function removeTask(idTask){
+    todayTodosArray.forEach((element, index) => {
+        if (element.id == idTask){
+            todayTodosArray.splice(index, 1);
+            showBoth();
+            addCheckpointListener();
+            todosCompletedArray.push(element);
+            console.log('opcja 1');
+        }
+    })
     todosArray.forEach((element, index) => {
         if (element.id == idTask){
             todosArray.splice(index, 1);
-            console.log(todosArray);
-            showTodosArray();
+            showBoth();
             addCheckpointListener();
             todosCompletedArray.push(element);
+            console.log('opccja 2')
         }
     })
 }
@@ -85,13 +135,17 @@ function removeTask(idTask){
 export function addCheckpointListener(){
     document.querySelectorAll('.task-checkpoint').forEach(checkBtn => {
                 checkBtn.addEventListener('click', function(){
-                    console.log(checkBtn)
                     removeTask(checkBtn.dataset.id);
-                    if(todosArray.length === 0){
-                        document.querySelector('.headerJs').innerHTML = 'Today';
-                        clearForm();
-                        addBtnListener();
-                    }
+                    const header = document.querySelector('.headerJs').innerHTML
+                        if(todayTodosArray.length === 0 ){
+                            if(header == 'Today' || header == todayTodoString){
+                                clearForm();
+                                addBtnListener()
+                            } else{
+                                clear();
+                            } 
+                        }
+                    
                 })
             })
 }
@@ -107,4 +161,8 @@ function clearInput(inputTitle, inputDesc, date, prior, project){
 
 function addBtnListener(){
     document.querySelector('.add-task').addEventListener('click', addTask);
+}
+
+function addToLocalStorage(){
+    localStorage.setItem('todayArray', JSON.stringify(todayTodosArray))
 }
