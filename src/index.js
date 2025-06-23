@@ -3,7 +3,7 @@ import './styles/main.css';
 import './imagesScript.js';
 import './todayDOM.js'
 import './todayScript.js'
-import { clear, clearForm, clearAll, showAddBtn, showAddForm, showPlaceContent } from './todayDOM.js';
+import { clear, clearForm, clearAll, showAddBtn, showAddForm, showPlaceContent, showMessage } from './todayDOM.js';
 import { showTodosArray , addCheckpointListener, todosArray, addTask, showTodayTodosArray, todayTodosArray, showBoth} from './todayScript.js';
 import { showCompletedTasks } from './completed.js';
 const { isBefore, isToday } = require("date-fns");
@@ -51,4 +51,6 @@ document.querySelectorAll('.row-container').forEach(option => {
     })
 })
 
+
+    
 

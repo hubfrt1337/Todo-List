@@ -55,6 +55,8 @@ section.appendChild(placeContent);
 showPlaceContent()
 
 export function showAddForm(){
+    
+    
     const form = document.createElement('form');
 const taskTitle = document.createElement('div');
 const inputTitle = document.createElement('input');
@@ -171,7 +173,26 @@ export function showAddBtn(){
     btn.classList = 'add-btn-header';
     btn.innerHTML = `<span>+</span> Add Task`;
     header.appendChild(btn);
-    console.log('sa')
+    
+}
+
+export function showMessage(){
+    const btnMsg = document.createElement('div');
+    btnMsg.className = "display-msg";
+    btnMsg.innerText = "Task Added!";
+    const formContainer = document.querySelector('.task-container');
+    formContainer.appendChild(btnMsg)
+
+    document.querySelector('.add-task-form').addEventListener('click', function(){
+        btnMsg.style.display = "block";
+        setTimeout(() => {
+            btnMsg.style.opacity = '0';
+            
+        }, 300);
+        setTimeout(() => {
+            btnMsg.style.display = 'none'
+        }, 1300);
+    })
 }
 
 

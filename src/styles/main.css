@@ -49,6 +49,7 @@ header{
     width: 250px;
 }
 .task-container{
+    position: relative;
     display: flex;
     padding: 10px;
     border-radius: 0.5rem;
@@ -208,4 +209,25 @@ header{
 }
 .add-btn-header:hover{
     background-color: #db2110;
+}
+
+.display-msg{
+    display: none;
+    padding: 5px;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    max-height: 35px;
+    margin: auto;
+    color: whitesmoke;
+    background-color: green;
+    border: none;
+    border-radius: 0.5rem;
+    opacity: 1;
+    text-align: center;
+    transition: all linear 1s;
 }
