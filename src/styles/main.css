@@ -7,7 +7,7 @@ main{
 header{
     font-size: 2rem;
     font-weight: bold;
-    margin-top: 3rem;
+    margin-top: 5rem;
     margin-left: 2rem;
     margin-bottom: 2rem;
 }
@@ -230,4 +230,44 @@ header{
     opacity: 1;
     text-align: center;
     transition: all linear 1s;
+}
+
+
+
+/* resposive design*/
+.icon-absolute{
+    display: none;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+.icon-absolute>img{
+    display: block;
+    object-fit: contain;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    margin-top: 5px;
+
+}
+.icon-absolute:hover{
+    background-color: #dcc9b7;
+    border-radius: 0.5rem;
+}
+@media screen and (max-width: 800px){
+    main{
+        grid-template-columns: 1fr;
+        position: relative;
+    }
+    .icon-absolute{
+        display: block;
+        z-index: 2;
+    }
+
+    .icon-container-menu{
+        display: none;
+    }
 }

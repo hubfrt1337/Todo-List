@@ -22,10 +22,10 @@ document.querySelectorAll('.row-container').forEach(option => {
             
             
         }else if(option.classList.contains('todayJs')){
+            header.innerHTML = 'Today';
             clear()
             showTodayTodosArray();
             addCheckpointListener();
-            header.innerHTML = 'Today';
             if(todayTodosArray.length == 0){
                 showPlaceContent();
                 document.querySelector('.add-task').addEventListener('click', addTask);
@@ -48,9 +48,12 @@ document.querySelectorAll('.row-container').forEach(option => {
             header.innerHTML = `Completed Tasks!`;
             showCompletedTasks();
         }
+        document.querySelector('.side').classList.toggle('side-show');
     })
 })
 
 
-    
+    document.querySelector('.icon-absolute').addEventListener('click', function(){
+        document.querySelector('.side').classList.toggle('side-show')
+    })
 
