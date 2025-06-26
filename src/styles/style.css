@@ -57,6 +57,10 @@
     width: 40px;
     height: 40px;
 }
+.icon-container-menu{
+    display: none;
+    position: absolute;
+}
 .icon-container-menu:hover{
     background-color: #dcc9b7;
     border-radius: 0.5rem;
@@ -78,8 +82,22 @@
     cursor: pointer;
 }
 
+    .max-side-show{
+        display: none;
+    }
+
+    .icon-max{
+        position: absolute;
+        top: 20px;
+        left: 240px;
+
+    }
+    .icon-max:hover{
+        background-color: #dcc9b7;
+        border-radius: 0.5rem;
+    }
 @media screen and (max-width: 800px){
-    
+
     .side{
         display: none;
         position: absolute;
@@ -89,10 +107,12 @@
         display: flex;
         z-index: 1;
     }
-    section{
-        
-    }
+    
     .middle-aside{
         margin-top: 40px;
     }
+}
+
+.one-fr{
+    grid-template-columns: 1fr;
 }

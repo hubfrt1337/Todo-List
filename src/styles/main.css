@@ -267,7 +267,11 @@ header{
         z-index: 2;
     }
 
-    .icon-container-menu{
+    .icon-max{
         display: none;
     }
+}
+
+.icon-to-left{
+    left: 20px;
 }
