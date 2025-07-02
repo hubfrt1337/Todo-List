@@ -76,7 +76,7 @@ export function showAddForm() {
   inputTitle.required = true;
   form.className = "task-container";
   taskTitle.className = "task-title";
-  taskDesc.innerHTML = `<input type="text" name="desc" id="desc-input" placeholder="Description: Buy groceries for lasagne"></input>`;
+  taskDesc.innerHTML = `<textarea type="text" cols="90" rows="2" maxlength="100" name="desc" id="desc-input" placeholder="Description: Buy groceries for lasagne"></textarea>`;
   taskRow1.className = "task-row1";
   inputDate.type = "date";
   inputDate.id = "date-input";
