@@ -138,6 +138,7 @@ header {
   max-width: 600px;
   margin-left: 2rem;
   margin-right: 2rem;
+  height: 200px;
   padding: 10px;
   border: solid 1px grey;
   border-radius: 0.5rem;
@@ -150,6 +151,10 @@ header {
 .flex-task {
   display: flex;
   justify-content: space-between;
+  gap: 3rem;
+}
+.opis{
+  
 }
 .task-checkpoint {
   height: 20px;
@@ -180,6 +185,12 @@ header {
   gap: 3rem;
   font-weight: bold;
   align-items: center;
+}
+.tytul,
+.opis{
+  max-width: 550px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* js */
